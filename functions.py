@@ -31,13 +31,17 @@ def range_sum():
 range_sum()
 
 # check if the result is an even or odd number
-def even_or_odd():
-    if range_sum() % 2 == 0:
+def even_or_odd(number):
+    result = number % 2
+    print(f"{number} % 2 = {result}")  # Print the arithmetic operation
+    if result == 0:
         return "Even"
     else:
         return "Odd"
     
 print(even_or_odd())
+
+
 
 
 def number_of_students():

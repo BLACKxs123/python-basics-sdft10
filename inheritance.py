@@ -29,7 +29,7 @@ class Mammal(Animal):
 class Dog(Mammal):
 
     def bark(self):
-        print(f"{self.name} is barking"))
+        print(f"{self.name} is barking")
 
 class SnifferDog (Dog):
     

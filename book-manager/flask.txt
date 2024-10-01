@@ -1,0 +1,5 @@
+Wednesday -> Routing, jsonify, http methods
+Thursday -> Flask SQLALCHEMY, Database, APIs
+friday -  Authenticate an API
+
+FAST API - > Redo the above 

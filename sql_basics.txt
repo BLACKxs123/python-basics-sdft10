@@ -1,0 +1,36 @@
+SQL BASICS 
+
+DATABASE - A database is an organized collection of data, generally stored and accessed electronically from a computer system. Databases are designed to manage large bodies of information by storing, retrieving, and managing data efficiently.
+SQL - (Structured Query Language): SQL is a standard programming language specifically designed for managing and manipulating databases. It is used to perform various operations on the data stored in a database, such as querying, updating, inserting, and deleting data.
+
+WHICH TOOLS TO WORK WITH 
+
+There are several tools you can use to work with SQL, ranging from command-line interfaces to full-featured graphical user interfaces (GUIs). Here are some popular options:
+
+Command-Line Tools
+MySQL Command Line Client: A command-line tool for interacting with MySQL databases.
+psql: The command-line interface for PostgreSQL.
+SQLite3: A command-line tool for interacting with SQLite databases.
+
+SQL BASIC COMMANDS
+
+CREATE A DATABASE - CREATE DATABASE book_manager;
+CONNECT - \c book_manager
+LIST ALL DATABASE TABLES - \dt 
+
+CREATE DATABASE TABLES - CREATE TABLE Books (
+    id INT PRIMARY KEY,
+    title VARCHAR(100),
+    author VARCHAR(100),
+    isbn VARCHAR(20),
+    is_lent BOOLEAN
+);
+
+
+INSERT DATA TO A DATABASE TABLE 
+
+INSERT INTO Members (id, name, member_id) VALUES (1, 'Alice', 1)
+
+VIEW THE DATA PRESENT WITHIN A DATABASE TABLE 
+
+
