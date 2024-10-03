@@ -1,7 +1,20 @@
 from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 # create an instance of my flask class so as to generate a new flask app
 app = Flask(__name__)
+
+#configure the database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+# create an instance of the SQLAlchemy class
+db = SQLAlchemy(app)
+
+# create an instance of the Migrate class
+migrate = Migrate(app, db)
 
 books_list = [
     {"id": 1, "title": "1984", "author": "George Orwell"},
