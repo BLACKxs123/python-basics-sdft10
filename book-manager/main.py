@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 app = Flask(__name__)
 
 #configure the database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:allcowseatgrass@127.0.0.1:5432/book_manager'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -21,12 +21,6 @@ from models.book import Book
 from models.member import Member
 from models.user import User
 
-books_list = [
-    {"id": 1, "title": "1984", "author": "George Orwell"},
-    {"id": 2, "title": "To Kill a Mockingbird", "author": "Harper Lee"},
-    {"id": 3, "title": "The Great Gatsby", "author": "F. Scott Fitzgerald"}
-]
-
 @app.route('/')
 def home():
 
@@ -38,23 +32,34 @@ def home():
 def books():
 
     if request.method == 'GET':
-        return jsonify(books_list)
+        all_books = db.session.query(Book).all()
+        return jsonify(all_books)
+    
     elif request.method == 'POST':
-        new_book = {"id": 4, "title": "The Catcher in the Rye", "author": "J.D"}
-        books_list.append(new_book)
-        return jsonify(books_list)
+
+        # get the data from the request
+        data = request.get_json()
+
+        # create a new book object
+        new_book = Book(author=data['author'], isbn=data['isbn'], is_lent=data['is_lent'])
+
+        # add the book to the database
+        db.session.add(new_book)
+
+        # commit the changes
+        db.session.commit()
+
+        return jsonify({"book": new_book, "message": "You have added a new book!"})
+        
     elif request.method == 'PUT':
-        updated_book = {"id": 1, "title": "Seth Gor", "author": "George Orwell"}
-        books_list[0] = updated_book
-        return jsonify(books_list)
+        return "You have updated a book"
     elif request.method == 'DELETE':
-        books_list.pop(0)
-        return jsonify(books_list)
+        return "You have deleted a book"
     return "Here are all the books!"
 
-@app.route('/books/<int:book_id>/<string:book_name>')
-def book(book_id, book_name):
-    return f"Here is the book with id {book_id} {book_name}!"
+# @app.route('/books/<int:book_id>/<string:book_name>')
+# def book(book_id, book_name):
+#     return f"Here is the book with id {book_id} {book_name}!"
 
 if __name__ == '__main__':
     app.run(debug=True)
