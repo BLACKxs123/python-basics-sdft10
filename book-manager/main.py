@@ -16,6 +16,11 @@ db = SQLAlchemy(app)
 # create an instance of the Migrate class
 migrate = Migrate(app, db)
 
+#import my models 
+from models.book import Book
+from models.member import Member
+from models.user import User
+
 books_list = [
     {"id": 1, "title": "1984", "author": "George Orwell"},
     {"id": 2, "title": "To Kill a Mockingbird", "author": "Harper Lee"},
